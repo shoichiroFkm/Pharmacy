@@ -1,0 +1,4 @@
+name: Pharmacy
+version: '${version}'
+main: jp.houlab.shoichiro.pharmacy.Pharmacy
+api-version: '1.20'
