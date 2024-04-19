@@ -31,6 +31,7 @@ public class Ability implements Listener {
                     location.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE,location.getX(), location.getY()+2, location.getZ(),200,0,1,0,0.5);
                     location.getWorld().playSound(location, Sound.ENTITY_WITCH_AMBIENT,1,0);
                     location.getWorld().playSound(location, Sound.BLOCK_SAND_BREAK,1,0);
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 25, 5,true));
 
                     ItemStack potion = new ItemStack(Material.POTION);
                         PotionMeta meta = (PotionMeta) potion.getItemMeta();
