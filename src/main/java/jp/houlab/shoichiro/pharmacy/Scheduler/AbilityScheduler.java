@@ -14,7 +14,7 @@ public class AbilityScheduler extends BukkitRunnable {
 
     @Override
     public void run() {
-        location.getWorld().spawnParticle(Particle.SPIT,location.getX(), location.getY(), location.getZ(),50,0,2,0,0.3);
+        location.getWorld().spawnParticle(Particle.SPIT,location.getX(), location.getY(), location.getZ(),80,0,2,0,0.3);
         location.getWorld().playSound(location, Sound.ENTITY_ITEM_PICKUP,1,1);
     }
 }

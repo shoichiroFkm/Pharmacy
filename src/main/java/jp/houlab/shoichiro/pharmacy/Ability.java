@@ -26,11 +26,11 @@ public class Ability implements Listener {
                 if (event.getMaterial().equals(Material.BLAZE_POWDER) ) {
 
                     Location location=player.getLocation();
-                    location.getWorld().spawnParticle(Particle.FALLING_SPORE_BLOSSOM,location.getX()+1, location.getY()+1, location.getZ()+1,80,0,1,0,0);
-                    location.getWorld().spawnParticle(Particle.FALLING_NECTAR,location.getX()+1, location.getY()+1, location.getZ()-1,80,0,1,0,0);
-                    location.getWorld().spawnParticle(Particle.FALLING_OBSIDIAN_TEAR,location.getX()-1, location.getY()+1, location.getZ()+1,80,0,1,0,0);
-                    location.getWorld().spawnParticle(Particle.FALLING_HONEY,location.getX()-1, location.getY()+1, location.getZ()-1,80,0,1,0,0);
-                    location.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE,location.getX(), location.getY()+2, location.getZ(),200,1,0,1,0.5);
+                    location.getWorld().spawnParticle(Particle.FALLING_SPORE_BLOSSOM,location.getX()+1, location.getY()+2, location.getZ()+1,80,0.2,1,0.2,0);
+                    location.getWorld().spawnParticle(Particle.FALLING_NECTAR,location.getX()+1, location.getY()+2, location.getZ()-1,80,0.2,1,0.2,0);
+                    location.getWorld().spawnParticle(Particle.FALLING_OBSIDIAN_TEAR,location.getX()-1, location.getY()+2, location.getZ()+1,80,0.2,1,0.2,0);
+                    location.getWorld().spawnParticle(Particle.FALLING_HONEY,location.getX()-1, location.getY()+2, location.getZ()-1,80,0.2,1,0.2,0);
+                    location.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE,location.getX(), location.getY()+2, location.getZ(),200,0,1,0,0.5);
                     location.getWorld().playSound(location, Sound.ENTITY_WITCH_AMBIENT,1,0);
                     location.getWorld().playSound(location, Sound.BLOCK_SAND_BREAK,1,0);
 
