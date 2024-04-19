@@ -13,8 +13,6 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.Random;
-
 public class Ability implements Listener {
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
@@ -33,8 +31,6 @@ public class Ability implements Listener {
                     location.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE,location.getX(), location.getY()+2, location.getZ(),200,0,1,0,0.5);
                     location.getWorld().playSound(location, Sound.ENTITY_WITCH_AMBIENT,1,0);
                     location.getWorld().playSound(location, Sound.BLOCK_SAND_BREAK,1,0);
-
-                    new AbilityScheduler(location).runTaskLater(Pharmacy.getPlugin(),20);
 
                     ItemStack potion = new ItemStack(Material.POTION);
                         PotionMeta meta = (PotionMeta) potion.getItemMeta();
@@ -57,20 +53,7 @@ public class Ability implements Listener {
                         meta2.displayName(Component.text("衝攻気陽の薬"));
                         potion2.setItemMeta(meta2);
 
-                    Random random = new Random();
-                    int num = random.nextInt(3);
-
-                    switch (num) {
-                        case 0:
-                            player.getInventory().addItem(new ItemStack( potion));
-                            break;
-                        case 1:
-                            player.getInventory().addItem(new ItemStack(potion1));
-                            break;
-                        default:
-                            player.getInventory().addItem(new ItemStack(potion2));
-                            break;
-                    }
+                    new AbilityScheduler(location,player,potion,potion1,potion2).runTaskLater(Pharmacy.getPlugin(),20L);
                 }
             }
         }

@@ -36,10 +36,6 @@ public class Ultimate implements Listener {
                              return;
                        }
 
-                        ally.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 600, 1));
-                        ally.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 600, 1));
-                        ally.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 600, 0));
-
                         Location location=player.getLocation();
                         location.getWorld().spawnParticle(Particle.END_ROD,location.getX(), location.getY()+0.5, location.getZ(),600,3,0,3,0);
                         location.getWorld().spawnParticle(Particle.DRAGON_BREATH,location.getX(), location.getY()+0.5, location.getZ(),600,3,0,3,0);
@@ -50,7 +46,7 @@ public class Ultimate implements Listener {
                         location.getWorld().playSound(location, Sound.ENTITY_ENDERMAN_TELEPORT,1,0);
 
                         new EnchantParticleScheduler(location).runTaskLater(Pharmacy.getPlugin(),25);
-                        new GlassSoundScheduler(location).runTaskLater(Pharmacy.getPlugin(),25);
+                        new GlassSoundScheduler(location,ally).runTaskLater(Pharmacy.getPlugin(),25);
 
                         Location location1=ally.getLocation();
                         location1.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE,location1.getX(), location1.getY()+2, location1.getZ(),200,0.5,1,0.5,0.5);

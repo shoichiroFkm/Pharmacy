@@ -6,6 +6,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.time.Duration;
+
 public class RemainScheduler extends BukkitRunnable {
     int time;
     Player player;
@@ -39,7 +41,7 @@ public class RemainScheduler extends BukkitRunnable {
         }
 
         if (count > 0 && count1 > 0 && count2 > 0) {
-            Title title = Title.title(Component.text(""), Component.text( "ULT残り"+time + "秒"));
+            Title title = Title.title(Component.text(""), Component.text( "ULT残り"+time + "秒"), Title.Times.times(Duration.ofSeconds(0),Duration.ofSeconds(20),Duration.ofSeconds(0)));
             player.showTitle(title);
         }
     }
