@@ -9,7 +9,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class GlassSoundScheduler extends BukkitRunnable {
     Location location;
-Player player;
+    Player player;
     public GlassSoundScheduler(Location location,Player player) {
         this.location = location;
         this.player=player;
