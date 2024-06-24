@@ -13,27 +13,31 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.Set;
+
 public class Ability implements Listener {
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
 
         Player player = event.getPlayer();
 
-        if (event.getHand() == EquipmentSlot.HAND) {
-            if (event.getAction().isRightClick()) {
-                if (event.getMaterial().equals(Material.BLAZE_POWDER) ) {
+        Set<String> tagPlayer = player.getScoreboardTags();
+        if (tagPlayer.contains("pharmacy")) {
+            if (event.getHand() == EquipmentSlot.HAND) {
+                if (event.getAction().isRightClick()) {
+                    if (event.getMaterial().equals(Material.BLAZE_POWDER)) {
 
-                    Location location=player.getLocation();
-                    location.getWorld().spawnParticle(Particle.FALLING_SPORE_BLOSSOM,location.getX()+1, location.getY()+2, location.getZ()+1,80,0.2,1,0.2,0);
-                    location.getWorld().spawnParticle(Particle.FALLING_NECTAR,location.getX()+1, location.getY()+2, location.getZ()-1,80,0.2,1,0.2,0);
-                    location.getWorld().spawnParticle(Particle.FALLING_OBSIDIAN_TEAR,location.getX()-1, location.getY()+2, location.getZ()+1,80,0.2,1,0.2,0);
-                    location.getWorld().spawnParticle(Particle.FALLING_HONEY,location.getX()-1, location.getY()+2, location.getZ()-1,80,0.2,1,0.2,0);
-                    location.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE,location.getX(), location.getY()+2, location.getZ(),200,0,1,0,0.5);
-                    location.getWorld().playSound(location, Sound.ENTITY_WITCH_AMBIENT,1,0);
-                    location.getWorld().playSound(location, Sound.BLOCK_SAND_BREAK,1,0);
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 25, 5,true));
+                        Location location = player.getLocation();
+                        location.getWorld().spawnParticle(Particle.FALLING_SPORE_BLOSSOM, location.getX() + 1, location.getY() + 2, location.getZ() + 1, 80, 0.2, 1, 0.2, 0);
+                        location.getWorld().spawnParticle(Particle.FALLING_NECTAR, location.getX() + 1, location.getY() + 2, location.getZ() - 1, 80, 0.2, 1, 0.2, 0);
+                        location.getWorld().spawnParticle(Particle.FALLING_OBSIDIAN_TEAR, location.getX() - 1, location.getY() + 2, location.getZ() + 1, 80, 0.2, 1, 0.2, 0);
+                        location.getWorld().spawnParticle(Particle.FALLING_HONEY, location.getX() - 1, location.getY() + 2, location.getZ() - 1, 80, 0.2, 1, 0.2, 0);
+                        location.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE, location.getX(), location.getY() + 2, location.getZ(), 200, 0, 1, 0, 0.5);
+                        location.getWorld().playSound(location, Sound.ENTITY_WITCH_AMBIENT, 1, 0);
+                        location.getWorld().playSound(location, Sound.BLOCK_SAND_BREAK, 1, 0);
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 25, 5, true));
 
-                    ItemStack potion = new ItemStack(Material.POTION);
+                        ItemStack potion = new ItemStack(Material.POTION);
                         PotionMeta meta = (PotionMeta) potion.getItemMeta();
                         meta.addCustomEffect(new PotionEffect(PotionEffectType.SPEED, 1800, 1), true);
                         meta.setColor(Color.fromRGB(0x33EBFF));
@@ -54,7 +58,8 @@ public class Ability implements Listener {
                         meta2.displayName(Component.text("衝攻気陽の薬"));
                         potion2.setItemMeta(meta2);
 
-                    new AbilityScheduler(location,player,potion,potion1,potion2).runTaskLater(Pharmacy.getPlugin(),20L);
+                        new AbilityScheduler(location, player, potion, potion1, potion2).runTaskLater(Pharmacy.getPlugin(), 20L);
+                    }
                 }
             }
         }

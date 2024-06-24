@@ -14,6 +14,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.Team;
 
+import java.util.Set;
+
 public class Ultimate implements Listener {
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
@@ -26,32 +28,35 @@ public class Ultimate implements Listener {
         for (String playerName : team.getEntries()) {
             Player ally = player.getServer().getPlayer(playerName);
 
-            if (event.getHand() == EquipmentSlot.HAND) {
-                if (event.getAction().isRightClick()) {
-                    if (event.getMaterial().equals(Material.DRAGON_BREATH)) {
+            Set<String> tagPlayer = player.getScoreboardTags();
+            if (tagPlayer.contains("pharmacy")) {
+                if (event.getHand() == EquipmentSlot.HAND) {
+                    if (event.getAction().isRightClick()) {
+                        if (event.getMaterial().equals(Material.DRAGON_BREATH)) {
 
-                        new RemainScheduler(player).runTaskTimer(Pharmacy.getPlugin(),0,20);
+                            new RemainScheduler(player).runTaskTimer(Pharmacy.getPlugin(), 0, 20);
 
-                        Location location=player.getLocation();
-                        location.getWorld().spawnParticle(Particle.END_ROD,location.getX(), location.getY()+0.5, location.getZ(),600,3,0,3,0);
-                        location.getWorld().spawnParticle(Particle.DRAGON_BREATH,location.getX(), location.getY()+0.5, location.getZ(),600,3,0,3,0);
-                        location.getWorld().spawnParticle(Particle.SPELL,location.getX(), location.getY()+1, location.getZ(),100,0,3,0,0);
+                            Location location = player.getLocation();
+                            location.getWorld().spawnParticle(Particle.END_ROD, location.getX(), location.getY() + 0.5, location.getZ(), 600, 3, 0, 3, 0);
+                            location.getWorld().spawnParticle(Particle.DRAGON_BREATH, location.getX(), location.getY() + 0.5, location.getZ(), 600, 3, 0, 3, 0);
+                            location.getWorld().spawnParticle(Particle.SPELL, location.getX(), location.getY() + 1, location.getZ(), 100, 0, 3, 0, 0);
 
-                        location.getWorld().playSound(location, Sound.ENTITY_WITCH_CELEBRATE,1,0);
-                        location.getWorld().playSound(location, Sound.BLOCK_BUBBLE_COLUMN_UPWARDS_AMBIENT,1,1);
-                        location.getWorld().playSound(location, Sound.ENTITY_ENDERMAN_TELEPORT,1,0);
+                            location.getWorld().playSound(location, Sound.ENTITY_WITCH_CELEBRATE, 1, 0);
+                            location.getWorld().playSound(location, Sound.BLOCK_BUBBLE_COLUMN_UPWARDS_AMBIENT, 1, 1);
+                            location.getWorld().playSound(location, Sound.ENTITY_ENDERMAN_TELEPORT, 1, 0);
 
-                        new EnchantParticleScheduler(location).runTaskLater(Pharmacy.getPlugin(),25);
-                        new GlassSoundScheduler(location,ally).runTaskLater(Pharmacy.getPlugin(),25);
+                            new EnchantParticleScheduler(location).runTaskLater(Pharmacy.getPlugin(), 25);
+                            new GlassSoundScheduler(location, ally).runTaskLater(Pharmacy.getPlugin(), 25);
 
-                        if (ally==null){
-                            return;
+                            if (ally == null) {
+                                return;
+                            }
+
+                            Location location1 = ally.getLocation();
+                            location1.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE, location1.getX(), location1.getY() + 2, location1.getZ(), 200, 0.5, 1, 0.5, 0.5);
+                            location1.getWorld().spawnParticle(Particle.ASH, location1.getX(), location1.getY() + 2, location1.getZ(), 200, 0.5, 1, 0.5, 0);
+                            location1.getWorld().spawnParticle(Particle.WHITE_ASH, location1.getX(), location1.getY() + 2, location1.getZ(), 200, 0.5, 1, 0.5, 0);
                         }
-
-                        Location location1=ally.getLocation();
-                        location1.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE,location1.getX(), location1.getY()+2, location1.getZ(),200,0.5,1,0.5,0.5);
-                        location1.getWorld().spawnParticle(Particle.ASH,location1.getX(), location1.getY()+2, location1.getZ(),200,0.5,1,0.5,0);
-                        location1.getWorld().spawnParticle(Particle.WHITE_ASH,location1.getX(), location1.getY()+2, location1.getZ(),200,0.5,1,0.5,0);
                     }
                 }
             }
