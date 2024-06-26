@@ -2,7 +2,6 @@ package jp.houlab.shoichiro.pharmacy;
 
 import jp.houlab.shoichiro.pharmacy.Scheduler.EnchantParticleScheduler;
 import jp.houlab.shoichiro.pharmacy.Scheduler.GlassSoundScheduler;
-import jp.houlab.shoichiro.pharmacy.Scheduler.RemainScheduler;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -32,9 +31,7 @@ public class Ultimate implements Listener {
             if (tagPlayer.contains("pharmacy")) {
                 if (event.getHand() == EquipmentSlot.HAND) {
                     if (event.getAction().isRightClick()) {
-                        if (event.getMaterial().equals(Material.DRAGON_BREATH)) {
-
-                            new RemainScheduler(player).runTaskTimer(Pharmacy.getPlugin(), 0, 20);
+                        if (event.getMaterial().equals(Material.DRAGON_BREATH)&& player.getCooldown(event.getMaterial()) == 0) {
 
                             Location location = player.getLocation();
                             location.getWorld().spawnParticle(Particle.END_ROD, location.getX(), location.getY() + 0.5, location.getZ(), 600, 3, 0, 3, 0);
@@ -48,14 +45,6 @@ public class Ultimate implements Listener {
                             new EnchantParticleScheduler(location).runTaskLater(Pharmacy.getPlugin(), 25);
                             new GlassSoundScheduler(location, ally).runTaskLater(Pharmacy.getPlugin(), 25);
 
-                            if (ally == null) {
-                                return;
-                            }
-
-                            Location location1 = ally.getLocation();
-                            location1.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE, location1.getX(), location1.getY() + 2, location1.getZ(), 200, 0.5, 1, 0.5, 0.5);
-                            location1.getWorld().spawnParticle(Particle.ASH, location1.getX(), location1.getY() + 2, location1.getZ(), 200, 0.5, 1, 0.5, 0);
-                            location1.getWorld().spawnParticle(Particle.WHITE_ASH, location1.getX(), location1.getY() + 2, location1.getZ(), 200, 0.5, 1, 0.5, 0);
                         }
                     }
                 }

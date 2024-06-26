@@ -25,7 +25,7 @@ public class Ability implements Listener {
         if (tagPlayer.contains("pharmacy")) {
             if (event.getHand() == EquipmentSlot.HAND) {
                 if (event.getAction().isRightClick()) {
-                    if (event.getMaterial().equals(Material.BLAZE_POWDER)) {
+                    if (event.getMaterial().equals(Material.BLAZE_POWDER)&& player.getCooldown(event.getMaterial()) == 0) {
 
                         Location location = player.getLocation();
                         location.getWorld().spawnParticle(Particle.FALLING_SPORE_BLOSSOM, location.getX() + 1, location.getY() + 2, location.getZ() + 1, 80, 0.2, 1, 0.2, 0);
